@@ -62,7 +62,7 @@ export default function Detail() {
   // console.log(detail.userId._id);
   // console.log(users._id);
   const navigate = useNavigate(); 
-  
+
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Card sx={{ maxWidth: 600 }}>
@@ -112,8 +112,7 @@ export default function Detail() {
               open={open}
               handleClose={handleClose}
               detail={detail}
-              info={info}
-              setInfo={setInfo}
+              
             />
 
             <Button
