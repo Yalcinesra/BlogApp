@@ -62,7 +62,7 @@ export default function Detail() {
   // console.log(detail.userId._id);
   // console.log(users._id);
   const navigate = useNavigate(); 
-  const [info,setInfo]=useState({title:detail.title,image:detail.image,category:detail.category,content:detail.content})
+  
   return (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
       <Card sx={{ maxWidth: 600 }}>
