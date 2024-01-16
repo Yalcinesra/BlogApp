@@ -22,6 +22,9 @@ const UpdateModal = ({ open, handleClose,detail}) => {
     console.log(e.target.id);
     setInfo({ ...info, [e.target.id]: e.target.value });
   };
+  useEffect(() => {
+    setInfo(detail);
+  }, [detail]);
 console.log(info);
   useEffect(() => {
     getCategories("categories");

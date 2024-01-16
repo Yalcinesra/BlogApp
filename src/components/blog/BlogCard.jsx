@@ -17,6 +17,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -37,16 +38,25 @@ export default function BlogCard({
   likes,
   countOfVisitors,
   comments,
+  updatedAt,
 }) {
+  const { users } = useSelector((state) => state.blog);
   const [expanded, setExpanded] = React.useState(false);
-let likeIcon=true;
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  console.log(users?._id);
+  const [isLikes, setIsLikes] = useState([]);
+  const handleLikeClick = () => {
+    
+    setIsLikes((likes) => [...likes, users?._id]);
+  };
+  console.log(isLikes);
   const navigate = useNavigate();
   const { currentUser} = useSelector((state) => state.auth);
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card >
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -62,6 +72,9 @@ let likeIcon=true;
       />
       <CardMedia component="img" height="194" image={image} alt="Paella dish" />
       <CardContent>
+      <Typography variant="body2" color="text.secondary">
+      { new Date(updatedAt).toLocaleString()}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {content.substring(0, 100)};
         </Typography>
@@ -69,7 +82,14 @@ let likeIcon=true;
       <Box display="flex" justifyContent="between">
         <CardActions>
           <IconButton  aria-label="add to favorites">
-            <FavoriteIcon/> {likes.length }
+            <FavoriteIcon onClick={handleLikeClick} sx={{
+                  color: `${
+                   
+                    likes?.filter((like) => like ===users?._id).length > 0
+                      ? "red"
+                      : "gray"
+                  }`,
+                }} /> {likes.length }
            
             </IconButton>
           <IconButton aria-label="add to favorites">

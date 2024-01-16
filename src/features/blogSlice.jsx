@@ -40,6 +40,10 @@ reducers: {
         state.loading = false;
         state.detail =data.data;
     },
+    commentSuccess:(state,{payload:{data,url}})=>{
+      state.loading = false;
+      state.comments =data.data;
+  },
 }
 
 
@@ -51,6 +55,7 @@ export const {
       detailSuccess,
     fetchFail,
     usersSuccess,
+    commentSuccess,
  
   } = blogSlice.actions;
   export default blogSlice.reducer;
