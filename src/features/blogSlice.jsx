@@ -12,6 +12,7 @@ initialState: {
     likes:[],
     countOfVisitors:0,
     comments:[],
+    userBlog:[],
 },
 reducers: {
     fetchStart: (state) => {
@@ -44,6 +45,11 @@ reducers: {
       state.loading = false;
       state.comments =data.data;
   },
+
+userBlogSuccess:(state,{payload:{data,url}})=>{
+  state.loading = false;
+  state.userBlog =data;
+},
 }
 
 
@@ -56,6 +62,7 @@ export const {
     fetchFail,
     usersSuccess,
     commentSuccess,
+    userBlogSuccess,
  
   } = blogSlice.actions;
   export default blogSlice.reducer;

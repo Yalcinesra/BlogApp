@@ -12,6 +12,7 @@ import MyNavbar from "../components/MyNavbar"
 import Footer from "../components/Footer";
 import Profile from "../pages/Profile";
 import UpdateBlog from "../components/blog/UpdateModal";
+import MyBlog from "../pages/MyBlog";
 const AppRouter = () => {
   return (
     <Router>
@@ -23,6 +24,7 @@ const AppRouter = () => {
         <Route path="newblog" element={<NewBlog />} />
         <Route path="updateBLog" element={<UpdateBlog />} />
         <Route path="about" element={<About />} />
+        <Route path="myBlog" element={<MyBlog />} />
         <Route path="profile" element={<Profile />} />
         <Route path="register" element={<Register />} />        
         <Route path="detail/:_id" element={<Detail />} /> 

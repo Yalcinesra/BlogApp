@@ -11,6 +11,7 @@ import {
   catSuccess,
   usersSuccess,
   commentSuccess,
+  userBlogSuccess,
 } from "../features/blogSlice";
 
 const useBlogCalls = () => {
@@ -102,7 +103,7 @@ const useBlogCalls = () => {
     dispatch(fetchStart());
     try {
       await axiosWithToken.put(`${url}/${body._id}`, body);
-      getBlogs(url);
+      getDetail(`${url}/${body._id}`);
     } catch (error) {
       dispatch(fetchFail());
     }
@@ -120,12 +121,13 @@ const useBlogCalls = () => {
     }
   };
   //! newComment
-  const postComment = async (url, newComment) => {
+  const postComment = async (url, infoComment) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken.post(`${url}/`, newComment);
+      const { data } = await axiosWithToken.post(`${url}/`,infoComment);
       toastSuccessNotify("Operation succes");
-      getComment(url);
+      getDetail(`blogs/${infoComment.blogId}`);
+    
       dispatch(commentSuccess({ data, url }));
     } catch (error) {
       dispatch(fetchFail());
@@ -135,7 +137,36 @@ const useBlogCalls = () => {
       console.log(error);
     }
   };
-
+  //! userBlog MyBlog
+  const getUserBlog = async (id) => {
+   
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.get(`${id}`);
+      console.log(data);
+      dispatch(userBlogSuccess({ data,id }));
+    } catch (error) {
+      dispatch(fetchFail());
+      console.log(error);
+    } };
+  //! like
+  const postLike = async (url) => {
+    dispatch(fetchStart());
+    try {
+      const { data } = await axiosWithToken.post(`${url}/`);
+      toastSuccessNotify("Operation succes");
+      getBlogs("blogs");
+      
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify(
+        error?.response?.data?.message || "Operation not success"
+      );
+      console.log(error);
+    }
+  };
+  
+ 
   return {
     getBlogs,
     getDetail,
@@ -146,6 +177,8 @@ const useBlogCalls = () => {
     putBlog,
     getComment,
     postComment,
+    postLike,
+    getUserBlog,
   };
 };
 

@@ -7,6 +7,7 @@ import useBlogCalls from "../hooks/useBlogCalls";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewBlog = () => {
   const initialValue = {
@@ -22,7 +23,7 @@ const NewBlog = () => {
     setNewBlog({ ...newBlog, [e.target.name]: e.target.value }); 
   };
   
-
+  const navigate = useNavigate();
   const { categories } = useSelector((state) => state.blog);
 
   const { postBlogs, getCategories } = useBlogCalls();
@@ -31,6 +32,7 @@ const NewBlog = () => {
     postBlogs("blogs", newBlog);
     setNewBlog(initialValue);
     console.log(newBlog);
+    // navigate("/")
   };
   useEffect(() => {
     getCategories("categories");

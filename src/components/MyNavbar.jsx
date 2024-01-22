@@ -184,7 +184,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {!currentUser ? settings.anAuth.map((setting,index) => (
-                <MenuItem key={setting.title} onClick={()=> navigate(setting.url)}>
+                <MenuItem key={setting.title} onClick={()=>setting.url==="myBlog" ? navigate(`blogs?author=${user.id}` + _id) :navigate(setting.url)}>
                   <Typography textAlign="center">{setting.title}</Typography>
                 </MenuItem>
               )):settings.auth.map((setting,index) => (

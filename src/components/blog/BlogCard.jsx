@@ -18,6 +18,7 @@ import { Box, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import useBlogCalls from "../../hooks/useBlogCalls";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -40,19 +41,19 @@ export default function BlogCard({
   comments,
   updatedAt,
 }) {
-  const { users } = useSelector((state) => state.blog);
-  const [expanded, setExpanded] = React.useState(false);
+  const { _id:userId} = useSelector((state) => state.auth);
+  const { postLike} = useBlogCalls();
+ 
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  console.log(users?._id);
-  const [isLikes, setIsLikes] = useState([]);
+ 
+ 
+ 
   const handleLikeClick = () => {
     
-    setIsLikes((likes) => [...likes, users?._id]);
+    
+      postLike( `blogs/${_id}/postLike`)
   };
-  console.log(isLikes);
+
   const navigate = useNavigate();
   const { currentUser} = useSelector((state) => state.auth);
   return (
@@ -76,7 +77,7 @@ export default function BlogCard({
       { new Date(updatedAt).toLocaleString()}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {content.substring(0, 100)};
+          {content.substring(0, 100)}
         </Typography>
       </CardContent>
       <Box display="flex" justifyContent="between">
@@ -85,7 +86,7 @@ export default function BlogCard({
             <FavoriteIcon onClick={handleLikeClick} sx={{
                   color: `${
                    
-                    likes?.filter((like) => like ===users?._id).length > 0
+                    likes?.filter((like) => like ===userId).length > 0
                       ? "red"
                       : "gray"
                   }`,

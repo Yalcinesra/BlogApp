@@ -22,12 +22,12 @@ const authSlice = createSlice({
     },
     registerSuccess: (state,{payload})=>{
       state.loading = false;
-      state.currentUser = payload.data.username
-      state.token = payload.token
-      state._id=payload?.user?._id;
-      state.firstName=payload?.user?.firstName;
-      state.lastName=payload?.user?.lastName;
-      state.image=payload?.user?.image;
+      state.currentUser = payload.data.username;
+      state.token = payload.token;
+      state._id=payload?.data?._id;
+      state.firstName=payload?.data?.firstName;
+      state.lastName=payload?.data?.lastName;
+      state.image=payload?.data?.image;
     },
   
     loginSuccess: (state, { payload }) => {

@@ -17,32 +17,28 @@ const CommentForm = ({ detail}) => {
     const { _id } = useParams();
   const { comments} = useSelector((state) => state.blog);
   const { getComment,postComment } = useBlogCalls();
-  const [infoComment,setInfoComment]=useState(comments)
-  useEffect(() => {
-    getComment("comments/" + _id);
-  }, []);
-  console.log(comments);
+  const [comment,setComment]=useState("")
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-      postComment("comments",infoComment)
-      setInfoComment(initialValue);
-   
-  
-  };
-console.log(infoComment);
-  console.log("comment", comments);
-  const handleChange = (e) => {
-    console.log(e.target.id);
-    setInfoComment({ ...infoComment, [blogId]: _id, [e.target.id]:e.target.value });
-  };
+      postComment("comments",{blogId:_id,comment})
+    
+    
+    };
+
+
+console.log("comment", comments);
+
+ 
   return (
     <div>
-        <Box sx={{ display: "flex", justifyContent: "center", margin: 2 }}>
+        <Box sx={{ display: "flex", justifyContent: "center",alignItems:"center", margin: 2 }}>
      <Card
        sx={{
-         width: 400,
+         width: 5000 ,
          display: "flex",
+         flexDirection: "column",
          justifyContent: "center",
          alignItems: "center",
          padding: 2,
@@ -54,31 +50,34 @@ console.log(infoComment);
          onSubmit={handleSubmit}
          sx={{ display: "flex", flexDirection: "column", gap: 2 }}
        >
-         <CardHeader title="Comment" />
+         <CardHeader title="Add Comment" />
          <TextField
            label="Comment"
            name="comment"
            id="comment"
            type="text"
            variant="outlined"
-           value={infoComment?.comment}
-           onChange={handleChange}
+           value={comment}
+           onChange={(e)=>setComment(e.target.value)}
          />
          <Button type="submit" variant="contained">
           Add Comment
          </Button>
        </Box>
-     </Card>
-     <Container maxWidth={"xl"}>
+       <Box  sx={{display: "flex", justifyContent: "center",alignItems:"center" }}>
+     
+     
         <Grid container spacing={2} mt={3}>
-          {comments?.map((item) => (
+          {detail?.comments?.map((item) => (
             <Grid key={item._id} >
-              <CommentCard {...item} setInfoComment={setInfoComment} />
+              <CommentCard {...item} />
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Box>
 
+     </Card>
+     
    </Box>
    
   </div>

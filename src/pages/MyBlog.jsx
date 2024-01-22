@@ -1,5 +1,5 @@
 import * as React from "react";
-
+import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,35 +11,36 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { Avatar, Box, Button, Grid } from "@mui/material";
-import { useParams } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import useBlogCalls from "../hooks/useBlogCalls";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-
 import UpdateModal from "../components/blog/UpdateModal";
-import CommentForm from "../components/blog/CommentForm";
 
 
 
 
-export default function Detail() {
+
+export default function MyBlog() {
   
 
-  const [blogDetail, setBlogDetail] = useState();
-  //  const{title,content,image}=blogDetail;
+ 
+
+ 
+ 
+ 
+  const { _id} = useSelector((state) => state.auth);
+  const {currentUser} = useSelector((state) => state.auth);
+  const { userBlog } = useSelector((state) => state.blog);
 
 
-  const { _id } = useParams();
-  // const { currentUser } = useSelector((state) => state.auth);
-  const { users } = useSelector((state) => state.blog);
-  const { detail } = useSelector((state) => state.blog);
 
-  const { getDetail, deleteBlog, getUser,postLike} = useBlogCalls();
 
-  const [openComment, setOpenComment] = React.useState(false);
+  const { getBlogs, deleteBlog, getUserBlog } = useBlogCalls();
+
+ 
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -48,67 +49,69 @@ export default function Detail() {
   };
 
   useEffect(() => {
-    getDetail("blogs/" + _id);
-   
+    getUserBlog(`blogs?author=${_id}`);
+    
   }, []);
 
-  console.log(_id);
-  console.log(detail?.comments);
+  
+  
+console.log(userBlog);
 
-  // console.log( users?._id);
-  console.log(detail?.userId?.username);
+  
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box>
+    {userBlog?.data?.map((blog) => (
+    <Box sx={{ display: "flex", justifyContent: "center", margin:2}}>
       <Card sx={{ maxWidth: 600 }}>
-        <CardHeader title={detail?.title} />
+        <CardHeader title={blog?.title} />
         <CardMedia
           component="img"
-          height="300"
-          image={detail?.image}
-          alt="Paella dish"
+          height="200"
+          image={blog?.image}
+          alt="image"
         />
         <Box sx={{ margin: 3, display: "flex" }}>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
           <Typography variant="body2" color="text.secondary" margin={1}>
-            {detail?.userId?.username}
+            {currentUser}
           </Typography>
         </Box>
         <Typography variant="body2" color="text.secondary" margin={2}>
-          {new Date(detail?.updatedAt).toLocaleString()}
+          {new Date(blog?.updatedAt).toLocaleString()}
         </Typography>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {detail?.content};
+            {blog?.content}
           </Typography>
         </CardContent>
 
         <Box display="flex" justifyContent="between">
           <CardActions>
             <IconButton aria-label="add to favorites">
-              <FavoriteIcon onClick={()=>postLike("blogs/{post_id}/postLike")}
+              <FavoriteIcon
                 sx={{
                   color: `${
-                    detail?.likes?.filter((like) => like === users?._id)
+                    blog?.likes?.filter((like) => like === users?._id)
                       .length > 0
                       ? "red"
                       : "gray"
                   }`,
                 }}
               />
-              {detail?.likes?.length}
+              {blog?.likes?.length}
             </IconButton>
             <IconButton
               aria-label="add to favorites"
               onClick={()=>setOpenComment(!openComment)}
             >
               <ChatBubbleOutlineIcon />
-              {detail?.comments?.length}
+              {blog?.comments?.length}
             </IconButton>
             <IconButton aria-label="add to favorites">
               <VisibilityIcon />
-              {detail?.countOfVisitors}
+              {blog?.countOfVisitors}
             </IconButton>
           </CardActions>
           <CardActions
@@ -119,13 +122,9 @@ export default function Detail() {
             }}
           ></CardActions>
         </Box>
-        {openComment===true && 
-        <CommentForm detail={detail}/> 
         
-        
-      }
 
-        {detail?.userId?._id === users?._id  && (
+        {blog?.userId?._id === _id  && (
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate
@@ -145,6 +144,7 @@ export default function Detail() {
           </Box>
         )}
       </Card>
+    </Box>))}
     </Box>
   );
 }
