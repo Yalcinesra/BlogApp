@@ -22,8 +22,8 @@ const authSlice = createSlice({
     },
     registerSuccess: (state,{payload})=>{
       state.loading = false;
-      state.currentUser = payload.data.username;
-      state.token = payload.token;
+      state.currentUser = payload?.user?.username;
+      state.token = payload?.token;
       state._id=payload?.data?._id;
       state.firstName=payload?.data?.firstName;
       state.lastName=payload?.data?.lastName;

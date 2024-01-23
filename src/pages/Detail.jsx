@@ -33,7 +33,7 @@ export default function Detail() {
 
 
   const { _id } = useParams();
-  // const { currentUser } = useSelector((state) => state.auth);
+  const { _id:userId } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.blog);
   const { detail } = useSelector((state) => state.blog);
 
@@ -52,15 +52,17 @@ export default function Detail() {
    
   }, []);
 
-  console.log(_id);
-  console.log(detail?.comments);
+
+  // console.log(userId);
+console.log(detail?.userId?._id);
+console.log(userId);
 
   // console.log( users?._id);
-  console.log(detail?.userId?.username);
+  
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", margin:2 }}>
       <Card sx={{ maxWidth: 600 }}>
         <CardHeader title={detail?.title} />
         <CardMedia
@@ -87,7 +89,7 @@ export default function Detail() {
         <Box display="flex" justifyContent="between">
           <CardActions>
             <IconButton aria-label="add to favorites">
-              <FavoriteIcon onClick={()=>postLike("blogs/{post_id}/postLike")}
+              <FavoriteIcon onClick={()=>postLike(`blogs/${_id}/postLike`)}
                 sx={{
                   color: `${
                     detail?.likes?.filter((like) => like === users?._id)
@@ -125,7 +127,7 @@ export default function Detail() {
         
       }
 
-        {detail?.userId?._id === users?._id  && (
+        {detail?.userId?._id === userId && (
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate

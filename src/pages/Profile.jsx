@@ -20,7 +20,7 @@ export default function Profile() {
   
   }, []);
  
-console.log(users?.username);
+console.log(users);
 console.log(_id);
   return (
     <Box  display="flex" justifyContent="center"  alignContent="center">

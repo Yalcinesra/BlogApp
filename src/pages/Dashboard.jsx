@@ -27,7 +27,9 @@ function MyDashboard() {
     getBlogs("blogs");
     console.log("dashboard");
   }, []);
-  console.log(blogs);
+  // console.log(blogs.data.slice(0,5));
+  // const newBlog= blogs.data;
+  // console.log(newBlog.slice(0,5));
   return (
     <>
       <Container maxWidth={"xl"}>

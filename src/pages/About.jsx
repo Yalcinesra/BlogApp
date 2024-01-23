@@ -11,6 +11,9 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MailIcon from '@mui/icons-material/Mail';
 import { Box } from '@mui/material';
 export default function About() {
+ 
+ 
+  
   return (
     <Box  display="flex" justifyContent="center"  alignContent="center">
     <Card   display="flex" justifyContent="center"  alignItem="center"  textAlign="center" sx={{ width: 400, padding:2, boxShadow: 20 }}>
@@ -36,9 +39,12 @@ export default function About() {
         </Typography>
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"center", alignItems:"center"  }}>
-        <Button size="small" ><LinkedInIcon src="www.linkedin.com/in/esra--yalcin"/></Button>
-        <Button size="small" src="https://github.com/Yalcinesra"><GitHubIcon/></Button>
-        <Button size="small" src="https://github.com/Yalcinesra"><MailIcon/></Button>
+        <Button  href="https://www.linkedin.com/in/esra--yalcin"
+              target="true" size="small" ><LinkedInIcon/></Button>
+        <Button href="https://github.com/Yalcinesra"
+              target="true" size="small" ><GitHubIcon/></Button>
+        <Button href="mailto:gutekinder5@gmail.com"
+              target="true" size="small" ><MailIcon/></Button>
       </CardActions>
     </Card>
     </Box>

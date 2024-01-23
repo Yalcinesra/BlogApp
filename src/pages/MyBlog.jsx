@@ -34,11 +34,12 @@ export default function MyBlog() {
   const { _id} = useSelector((state) => state.auth);
   const {currentUser} = useSelector((state) => state.auth);
   const { userBlog } = useSelector((state) => state.blog);
+  const {detail } = useSelector((state) => state.blog);
 
 
 
 
-  const { getBlogs, deleteBlog, getUserBlog } = useBlogCalls();
+  const { deleteBlog, getUserBlog } = useBlogCalls();
 
  
 
@@ -55,7 +56,9 @@ export default function MyBlog() {
 
   
   
-console.log(userBlog);
+
+console.log(_id);
+console.log(userBlog?.data[0].userId);
 
   
   const navigate = useNavigate();
@@ -63,7 +66,7 @@ console.log(userBlog);
   return (
     <Box>
     {userBlog?.data?.map((blog) => (
-    <Box sx={{ display: "flex", justifyContent: "center", margin:2}}>
+    <Box key="_id " sx={{ display: "flex", justifyContent: "center", margin:2}}>
       <Card sx={{ maxWidth: 600 }}>
         <CardHeader title={blog?.title} />
         <CardMedia
@@ -122,9 +125,9 @@ console.log(userBlog);
             }}
           ></CardActions>
         </Box>
-        
 
-        {blog?.userId?._id === _id  && (
+
+        {userBlog?.data && userBlog?.data[0].userId === _id  && (
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate
