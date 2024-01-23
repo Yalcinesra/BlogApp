@@ -55,10 +55,10 @@ export default function MyBlog() {
   }, []);
 
   
-  
 
+  
 console.log(_id);
-console.log(userBlog?.data[0].userId);
+console.log(userBlog?.data);
 
   
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ console.log(userBlog?.data[0].userId);
   return (
     <Box>
     {userBlog?.data?.map((blog) => (
-    <Box key="_id " sx={{ display: "flex", justifyContent: "center", margin:2}}>
+    <Box key={blog._id}sx={{ display: "flex", justifyContent: "center", margin:2}}>
       <Card sx={{ maxWidth: 600 }}>
         <CardHeader title={blog?.title} />
         <CardMedia
@@ -127,7 +127,7 @@ console.log(userBlog?.data[0].userId);
         </Box>
 
 
-        {userBlog?.data && userBlog?.data[0].userId === _id  && (
+        {blog.userId === _id  && (
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate

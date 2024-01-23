@@ -43,8 +43,8 @@ export default function About() {
               target="true" size="small" ><LinkedInIcon/></Button>
         <Button href="https://github.com/Yalcinesra"
               target="true" size="small" ><GitHubIcon/></Button>
-        <Button href="mailto:gutekinder5@gmail.com"
-              target="true" size="small" ><MailIcon/></Button>
+        <Button component="a"  size="small" href="mailto:gutekinder5@gmail.com"
+              > <MailIcon/></Button>
       </CardActions>
     </Card>
     </Box>
