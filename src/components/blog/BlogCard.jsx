@@ -46,7 +46,7 @@ export default function BlogCard({
  
   const handleLikeClick = () => {
     
-      postLike( `blogs/${_id}/postLike`)
+      postLike( `blogs/${_id}/postLike`,_id)
   };
 
   const navigate = useNavigate();
