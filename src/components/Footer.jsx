@@ -11,7 +11,7 @@ export const Footer = () => {
         height: "3rem",
         backgroundColor: "secondary.main",
 
-        padding: "1rem",
+        // padding: "1rem",
         marginTop: "2rem",
         marginBottom: "0",
       }}

@@ -126,7 +126,7 @@ console.log(userBlog?.data);
         </Box>
 
 
-        {blog.userId === userId  && (
+        {/* {blog.userId === userId  && (
           <Box sx={{ display: "flex", justifyContent: "center", gap: 2, margin:2}}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate
@@ -144,7 +144,7 @@ console.log(userBlog?.data);
               Delete
             </Button>
           </Box>
-        )}
+        )} */}
       </Card>
     </Box>))}
     </Box>
