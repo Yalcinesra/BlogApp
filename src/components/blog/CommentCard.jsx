@@ -15,7 +15,7 @@ const CommentCard = ({userId,createdAt,comment}) => {
 {userId?.username}
       </Typography>
       <Typography variant="body2" color="text.secondary">
-{createdAt}
+{new Date(createdAt).toLocaleString()}
       </Typography>
       <Typography variant="body2" color="text.secondary">
 {comment}

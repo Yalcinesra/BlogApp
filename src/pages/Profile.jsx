@@ -30,7 +30,7 @@ console.log(_id);
           component="img"
           height="140"
           image={users?.image}
-          alt="green iguana"
+          alt="image"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

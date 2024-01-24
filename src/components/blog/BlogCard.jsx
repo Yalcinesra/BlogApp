@@ -44,18 +44,13 @@ export default function BlogCard({
   const { _id:userId} = useSelector((state) => state.auth);
   const { postLike} = useBlogCalls();
  
-
- 
- 
- 
   const handleLikeClick = () => {
-    
     
       postLike( `blogs/${_id}/postLike`)
   };
 
   const navigate = useNavigate();
-  const { currentUser} = useSelector((state) => state.auth);
+ 
   return (
     <Card >
       <CardHeader

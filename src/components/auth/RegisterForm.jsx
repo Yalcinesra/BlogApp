@@ -100,7 +100,7 @@ const SignUpForm = ({
             helperText={touched?.image && errors?.image}
             error={touched?.image && Boolean(errors?.image)}
           />
-          <TextField
+          {/* <TextField
             label="Bio"
             name="bio"
             id="bio"
@@ -111,7 +111,7 @@ const SignUpForm = ({
             onBlur={handleBlur}
             helperText={touched?.bio && errors?.bio}
             error={touched?.bio && Boolean(errors?.bio)}
-          />
+          /> */}
           <TextField
             label="password"
             name="password"

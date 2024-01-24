@@ -24,7 +24,7 @@ const CommentForm = ({ detail}) => {
     e.preventDefault();
       postComment("comments",{blogId:_id,comment})
     
-    
+    setComment("")
     };
 
 

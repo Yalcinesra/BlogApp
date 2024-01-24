@@ -30,8 +30,8 @@ export default function MyBlog() {
 
  
  
- 
-  const { _id} = useSelector((state) => state.auth);
+  const { _id:userId} = useSelector((state) => state.auth);
+  
   const {currentUser} = useSelector((state) => state.auth);
   const { userBlog } = useSelector((state) => state.blog);
   const {detail } = useSelector((state) => state.blog);
@@ -50,14 +50,14 @@ export default function MyBlog() {
   };
 
   useEffect(() => {
-    getUserBlog(`blogs?author=${_id}`);
+    getUserBlog(`blogs?author=${userId}`);
     
   }, []);
 
   
 
   
-console.log(_id);
+
 console.log(userBlog?.data);
 
   
@@ -96,8 +96,7 @@ console.log(userBlog?.data);
               <FavoriteIcon
                 sx={{
                   color: `${
-                    blog?.likes?.filter((like) => like === users?._id)
-                      .length > 0
+                    blog?.likes?.filter((like) => like === userId).length > 0
                       ? "red"
                       : "gray"
                   }`,
@@ -127,8 +126,8 @@ console.log(userBlog?.data);
         </Box>
 
 
-        {blog.userId === _id  && (
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+        {blog.userId === userId  && (
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 2, margin:2}}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate
             </Button>

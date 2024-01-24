@@ -150,12 +150,13 @@ const useBlogCalls = () => {
       console.log(error);
     } };
   //! like
-  const postLike = async (url) => {
+  const postLike = async (url,id) => {
     dispatch(fetchStart());
     try {
       const { data } = await axiosWithToken.post(`${url}/`);
       toastSuccessNotify("Operation succes");
-      getBlogs("blogs");
+      // getBlogs("blogs");
+      getDetail("blogs/" + id);
       
     } catch (error) {
       dispatch(fetchFail());

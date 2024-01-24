@@ -34,10 +34,12 @@ export default function Detail() {
 
   const { _id } = useParams();
   const { _id:userId } = useSelector((state) => state.auth);
-  const { users } = useSelector((state) => state.blog);
-  const { detail } = useSelector((state) => state.blog);
 
-  const { getDetail, deleteBlog, getUser,postLike} = useBlogCalls();
+  const { detail } = useSelector((state) => state.blog);
+  
+
+ 
+  const { getDetail, deleteBlog,getBlogs, getUser,postLike} = useBlogCalls();
 
   const [openComment, setOpenComment] = React.useState(false);
 
@@ -49,13 +51,19 @@ export default function Detail() {
 
   useEffect(() => {
     getDetail("blogs/" + _id);
-   
+ 
   }, []);
 
-
+  const handleLikeClick = () => {
+    
+    postLike( `blogs/${_id}/postLike`,_id)
+   
+};
   // console.log(userId);
-console.log(detail?.userId?._id);
+console.log(detail?.categoryId?.name);
+console.log(detail);
 console.log(userId);
+
 
   // console.log( users?._id);
   
@@ -69,7 +77,7 @@ console.log(userId);
           component="img"
           height="300"
           image={detail?.image}
-          alt="Paella dish"
+          alt="image"
         />
         <Box sx={{ margin: 3, display: "flex" }}>
           <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -82,24 +90,27 @@ console.log(userId);
         </Typography>
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {detail?.content};
+            {detail?.categoryId?.name}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="body2" color="text.secondary">
+            {detail?.content}
           </Typography>
         </CardContent>
 
         <Box display="flex" justifyContent="between">
           <CardActions>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon onClick={()=>postLike(`blogs/${_id}/postLike`)}
-                sx={{
+          <IconButton  aria-label="add to favorites">
+            <FavoriteIcon onClick={handleLikeClick} sx={{
                   color: `${
-                    detail?.likes?.filter((like) => like === users?._id)
-                      .length > 0
+                   
+                    detail.likes?.filter((like) => like ===userId).length > 0
                       ? "red"
                       : "gray"
                   }`,
-                }}
-              />
-              {detail?.likes?.length}
+                }} /> {detail?.likes?.length }
+           
             </IconButton>
             <IconButton
               aria-label="add to favorites"
@@ -128,7 +139,7 @@ console.log(userId);
       }
 
         {detail?.userId?._id === userId && (
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 2, margin:2}}>
             <Button variant="contained" color="success" onClick={handleOpen}>
               UpDate
             </Button>
