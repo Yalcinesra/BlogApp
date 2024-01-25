@@ -31,11 +31,7 @@ export default function About() {
         </Typography>
         <Typography gutterBottom variant="h6" component="div">Fullstack Developer</Typography>
         <Typography variant="body2" color="text.secondary">
-        I am a graduate of University
-          Computer Systems teaching and worked as an information technologies
-         teacher for 8 years. I also learned to use important web development tools such as HTML, CSS, PHP, ASPnet, C# and Photoshop.
-          Throughout my career, I have gained various experiences in computer
-           technologies and computing. 
+        Ich bin Informatik Lehrerin und Full Stack Web Developer.
         </Typography>
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"center", alignItems:"center"  }}>
