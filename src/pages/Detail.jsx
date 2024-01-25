@@ -28,8 +28,7 @@ import CommentForm from "../components/blog/CommentForm";
 export default function Detail() {
   
 
-  const [blogDetail, setBlogDetail] = useState();
-  //  const{title,content,image}=blogDetail;
+ 
 
 
   const { _id } = useParams();

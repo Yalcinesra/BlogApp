@@ -39,7 +39,7 @@ export default function MyBlog() {
 
 
 
-  const { deleteBlog, getUserBlog } = useBlogCalls();
+  const { deleteBlog,getDetail, getUserBlog} = useBlogCalls();
 
  
 
@@ -51,7 +51,7 @@ export default function MyBlog() {
 
   useEffect(() => {
     getUserBlog(`blogs?author=${userId}`);
-    
+    getDetail("blogs/" + userId);
   }, []);
 
   
@@ -59,6 +59,7 @@ export default function MyBlog() {
   
 
 console.log(userBlog?.data);
+
 
   
   const navigate = useNavigate();
@@ -139,7 +140,7 @@ console.log(userBlog?.data);
             <Button
               variant="contained"
               color="error"
-              onClick={() => {deleteBlog("blogs", _id) + navigate("/" )}}
+              onClick={() => {deleteBlog("blogs", blog._id) + navigate("/" )}}
             >
               Delete
             </Button>

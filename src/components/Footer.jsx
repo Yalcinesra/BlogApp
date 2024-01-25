@@ -5,16 +5,19 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        // position: "absolute",
-        // bottom: "0",
+    
+
         width: "100%",
         height: "3rem",
         backgroundColor: "secondary.main",
-
-        // padding: "1rem",
+         padding: "1rem",
         marginTop: "2rem",
         marginBottom: "0",
-      }}
+       
+    
+  }}
+
+      
     >
       <Container maxWidth="lg">
         <Grid container direction="column" alignItems="center">

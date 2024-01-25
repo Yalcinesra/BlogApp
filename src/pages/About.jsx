@@ -16,7 +16,7 @@ export default function About() {
   
   return (
     <Box  display="flex" justifyContent="center"  alignContent="center">
-    <Card   display="flex" justifyContent="center"  alignItem="center"  textAlign="center" sx={{ width: 400, padding:2, boxShadow: 20 }}>
+    <Card   display="flex" justifyContent="center"  alignItem="center"  textAlign="center" sx={{ margin:2, width: 400, padding:2, boxShadow: 20 }}>
       <CardMedia
        component="img"
         sx={{ height: 150, width:200,margin:"auto", textAlign:"center"}}
@@ -43,7 +43,7 @@ export default function About() {
               target="true" size="small" ><LinkedInIcon/></Button>
         <Button href="https://github.com/Yalcinesra"
               target="true" size="small" ><GitHubIcon/></Button>
-        <Button component="a"  size="small" href="mailto:gutekinder5@gmail.com"
+        <Button component="a"  size="small" href="mailto:gutekinder5@gmail.com" target="true"
               > <MailIcon/></Button>
       </CardActions>
     </Card>
